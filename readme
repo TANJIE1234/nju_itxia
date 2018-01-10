@@ -1,0 +1,67 @@
+2018-01-01 10:01:08 dor 当输入phone点击我要预约时之后的逻辑是什么:
+                                            1.读取当前phone正在处理的order并全部显示到now.html
+                                            2.读取当前phone正在处理的order并显示最近的一个到now.html
+                                            3.跳转到neworder.html新建order
+                                          查询该phone对应的order，若为空，则3，否则，2，默认只有一个等待处理或者正在处理的订单
+
+2018-01-02 21:00:43 dor 修改order的updatedon为Timestamp，用Date的话，从mysql读取的时候，时间信息丢失
+                                          改回java.util.date，丢失时间信息的原因在resultset.getDate返回的是java.sql.date类型，只有
+                                          年月日信息，改为resultset.getTimestamp，就可以了
+
+2018-01-02 21:58:43 dor showhistory?phone=123 ???????原因在LoginController中，使用了model.addFlashAttribute("phone",phone)
+                                            else {
+                                                        model.addFlashAttribute("orderList",orderList);
+                                            //            model.addFlashAttribute("phone",phone);
+                                                        return "redirect:/helper/shownow";
+                                                    }
+                                            点击历史请求时跳转，采用的时redirect，地址栏变了，所以model中的phone自动加到url
+
+2018-01-03 09:54:53 lab 关于url自动添加jsessionid的问题，改了Tomcat的web.xml中关于session的设置，目前不知道会有什么影响
+                                            <session-config>
+                                                    <session-timeout>30</session-timeout>
+                                            		 <tracking-mode>COOKIE</tracking-mode>
+                                            </session-config>
+
+2018-01-03 21:58:22 dor 在now界面session中保存当前order和oid，以前是当前phone的orderList。
+                                         新建之后修改订单，出现两个订单，时间秒数出现小数点？
+
+2018-01-04 09:00:30 lab 关于两个订单的问题，在helpercontroller中向数据库加入新订单后，并没有读回新订单，导致id为0，后面修改的时候改的
+                                         也是id值为0的订单
+                                         @RequestMapping(value = "/addorder",method = RequestMethod.POST)
+                                             public String addOrder(Order order,RedirectAttributes model){
+                                                 orderService.addOrder(order);
+                                                 model.addFlashAttribute("order",orderService.getHelperOrder(order.getPhone()).get(0));
+                                                 return "redirect:/helper/now";
+                                             }
+                                          时间小数点的问题，试了下把格式化了的时间传到mysql，读回仍有小数，最后在html中用thymeleaf表达式把时间格式化
+
+2018-01-04 12:34:37 dor 接下来处理删除按钮删除订单功能，可能要用到js
+
+2018-01-05 11:17:46 lab 添加了itxia.js文件，delOrder函数用来删除订单并绑定到删除按钮，在外部js文件中，使用utf-8无bom，confirm()中文乱码，
+                                         写在HTML中没有这个问题，js文件改为utf-8带bom无乱码，问题不明。
+
+2018-01-05 19:19:50 dor 编写展开回复按钮的效果
+
+2018-01-07 15:57:58 dor thymeleaf 不在标签中显示文本   https://stackoverflow.com/questions/25071985/thymeleaf-thtext-put-a-text-without-removing-html-structures
+                                            helper基笨完成，剩上传文件和一些可能的细节问题
+                                            接下来处理管理员登录
+
+2018-01-07 23:35:21 dor <button type="button" class="btn btn-default replybtn" th:text="展开回复信息+'('"></button>
+                                          button的文本展开回复信息点过之后就变成乱码，${#lists.size(order.reply)} order.reply有问题
+
+2018-01-08 19:58:06 dor order.reply有问题是因为在get wait working finish的时候order没有加上reply属性
+                                            中文乱码还是js文件的中文显示乱码问题，在Ubuntu下显示没有问题，实验室台式机显示也没问题？？
+
+2018-01-09 09:18:15 lab 获取回复的时候member的reply和helper的reply是分开获取的，最后显示的时候怎么按顺序显示？
+                                         让Reply实现Comparable接口，以reply的id作为比较的关键词。
+
+2018-01-09 12:17:14 dor 乱码问题突然就没了，接下来处理管理员发送消息和点击我来处理后的逻辑，在什么地方itxia id和order绑定？
+                                            处理work.html
+                                            在什么地方itxia id和order绑定？在change order的status时绑定itxia与order
+
+2018-01-09 22:15:03 lab order.handler是int型的数据，怎么展示到work页面？
+                                                处理回复按钮
+
+2018-01-10 08:48:19 lab python中是动态类型，从数据库中读取order时把member.name赋值给order.handler
+                                            在Java中，给Order增加一个属性handlerName？解决，在orderService中给handlerName赋值
+                                             knight.js中btnreply点击后post失败，status 500

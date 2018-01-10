@@ -1,0 +1,262 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>南京大学-IT 侠预约系统</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="/resources/base/bootstrap.min.css">
+
+    <link rel="stylesheet" href="/resources/style/knight/knight.css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <!-- 下面的button是在页面过窄的时候将导航栏的按钮缩为一个，适合pad等小平板，手机上展示 -->
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">NJU-IT 侠预约系统</a>
+        </div>
+        <div class="collapse navbar-collapse" id="main-navbar">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/admin/wait"><span class="glyphicon glyphicon-list-alt"></span>处理请求</a></li>
+                <li><a href="/admin/message"><span class="glyphicon glyphicon-comment"></span>最近回复</a></li>
+                <li><a href="/admin/setting"><span class="glyphicon glyphicon-cog"></span>设置</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span>登出</a></li>
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+</div>
+<!-- 导航栏-end -->
+
+
+
+<div class="container">
+
+    <div>
+        <h1>处理完成</h1>
+        <hr class="colorgraph">
+    </div>
+
+    <div class="row">
+        <div class="col-md-3">
+            <div class="list-group">
+                <a href="/admin/wait"
+                   class="list-group-item"><span
+                        class="badge">3</span>等待处理</a> <a href="/admin/work"
+                                                          class="list-group-item"><span
+                    class="badge">1</span>正在处理</a> <a href="/admin/finish"
+                                                      class="list-group-item list-group-item-success"><span
+                    class="badge">1</span>处理完成</a>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <form role="form" action="/admin/finish" method="GET">
+                <div class="input-group">
+                    <span class="input-group-addon">记录搜索</span> <input type="text" name="search"
+                                                                       class="form-control" placeholder="关键字"> <span
+                        class="input-group-btn">
+              <button class="btn btn-primary" type="submit" value="Submit"><span class="glyphicon glyphicon-search"></span></button>
+            </span>
+                </div>
+            </form>
+
+            <br />
+
+            <div class="panel panel-success" id="4430">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <a target="_blank" href="http://browse.renren.com/s/all?from=opensearch&q=朱蒂 南京大学">朱蒂</a>
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <p>
+                        <strong>IT侠: jujiangzhou</strong>
+                    </p>
+                    <p>
+                        <strong>提交时间: </strong>2016-04-08 11:27:54
+                    </p>
+                    <p>
+                        <strong>手机号码: </strong><a href="tel:13350021007">13350021007</a>
+                    </p>
+                    <p>
+                        <strong>邮箱: </strong>
+                    </p>
+                    <p>
+                        <strong>电脑型号: </strong><a target="_blank" href="http://www.baidu.com/s?word=华硕u303lb5200+拆机图">华硕u303lb5200</a>
+                    </p>
+                    <p>
+                        <strong>操作系统: </strong>win-8
+                    </p>
+                    <p>
+                        <strong>问题描述: </strong>之前是电脑几次蓝屏，然后上门显示它要提取错误信息，却一直在0%不变，我就把它强行关机了，后来打开就直接是那些设置什么的了，去找了一下修电脑的，他看了说硬盘坏了，但是问了些别的人又说那样直接看看不出来，要用软件去试。所以想让it侠帮忙看看。
+                    </p>
+
+                    <div style="margin: 0px 0px 10px;">
+                        <strong>上传文件: </strong>
+                        <!-- Button trigger modal -->
+                        <button class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal1" style="color: #428BCA;">
+                            .JPG文件1
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                        <h4 class="modal-title" id="myModalLabel1">.JPG文件1</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <a target="_blank" href="http://7naqz6.com1.z0.glb.clouddn.com/4430-1460194289904.jpg" class="btn btn-default btn-sm" role="button"><img style="height: auto; width: 100%;" src="http://7naqz6.com1.z0.glb.clouddn.com/4430-1460194289904.jpg"></a>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Button trigger modal -->
+                        <button class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal2" style="color: #428BCA;">
+                            .JPG文件2
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                        <h4 class="modal-title" id="myModalLabel2">.JPG文件2</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <a target="_blank" href="http://7naqz6.com1.z0.glb.clouddn.com/4430-1460194318965.jpg" class="btn btn-default btn-sm" role="button"><img style="height: auto; width: 100%;" src="http://7naqz6.com1.z0.glb.clouddn.com/4430-1460194318965.jpg"></a>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Button trigger modal -->
+                        <button class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal3" style="color: #428BCA;">
+                            .JPG文件3
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel3" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                        <h4 class="modal-title" id="myModalLabel3">.JPG文件3</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <a target="_blank" href="http://7naqz6.com1.z0.glb.clouddn.com/4430-1460194353226.jpg" class="btn btn-default btn-sm" role="button"><img style="height: auto; width: 100%;" src="http://7naqz6.com1.z0.glb.clouddn.com/4430-1460194353226.jpg"></a>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Button trigger modal -->
+                        <button class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal4" style="color: #428BCA;">
+                            .JPG文件4
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel4" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                        <h4 class="modal-title" id="myModalLabel4">.JPG文件4</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <a target="_blank" href="http://7naqz6.com1.z0.glb.clouddn.com/4430-1460194401313.jpg" class="btn btn-default btn-sm" role="button"><img style="height: auto; width: 100%;" src="http://7naqz6.com1.z0.glb.clouddn.com/4430-1460194401313.jpg"></a>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn btn-default replybtn">展开回复信息(0)</button>
+
+                    <div class="reply">
+                        <br />
+                        <textarea class="form-control content" name="content" rows="3"
+                                  placeholder="点击回复..."></textarea>
+                        <input type="text" class="order" name="order" value="4430" style="display: none">
+                        <br />
+                        <button class="subbtn btn btn-block btn-primary">回复</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="container" style="text-align:center;">
+    <ul class="pagination">
+        <li><a href="/knight/finish?page=0"><span class="glyphicon glyphicon-step-backward"></span></a></li>
+        <li><a href="/knight/finish?page=0"><span class="glyphicon glyphicon-backward"></span></a></li>
+        <li class="active"><a href="/knight/finish?page=0">1</a></li>
+        <li><a href="/knight/finish?page=0"><span class="glyphicon glyphicon-forward"></span></a></li>
+        <li><a href="/knight/finish?page=0"><span class="glyphicon glyphicon-step-forward"></span></a></li>
+    </ul>
+</div>
+
+
+<div class="container" style="text-align: center;">
+    <hr class="colorgraph">
+    <p>
+        <small>
+            Version 2.3,
+            Powered by
+            <a href="/eggs" style="color:#333;cursor:default;text-decoration:none;">LC</a>
+            & <a href="http://blog.itxia.club/itxia-2016chun-di-yi-ci-jian-mian-hui-he-ying/" target="_blank">IT侠Web开发组</a>
+            & <a href="http://bbs.nju.edu.cn/vd15124/board?board=NoteBook" target="_blank">小百合Notebook版</a>
+        </small>
+    </p>
+
+    <a class="atlwdg-trigger atlwdg-RIGHT" href="http://blog.itxia.club/feedback-collection/" target="_blank" id="atlwdg-trigger">给Web组留言</a>
+</div>
+
+<!-- Bootstrap core JavaScript -->
+<!-- ================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="/static/base/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/static/base/bootstrap.min.js"></script>
+<script src="/static/js/knight/knight.js"></script>
+</body>
+</html>

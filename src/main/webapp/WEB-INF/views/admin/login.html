@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>NJU IT侠预约系统</title>
+
+    <!-- Bootstrap -->
+    <link href="/resources/base/bootstrap.min.css" rel="stylesheet">
+    <link href="/resources/style/user/login.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-navbar" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <a class="navbar-brand" href="/">NJU IT侠预约系统</a>
+        </div>
+
+        <div class="collapse navbar-collapse" id="main-navbar">
+            <ul class="nav navbar-nav">
+                <li><a href="/"><span class="glyphicon glyphicon-list-alt"></span>预约维修</a></li>
+                <li class="active"><a href="/adminlogin"><span class="glyphicon glyphicon-list-alt"></span>后台管理</a></li>
+            </ul>
+            <ul class="nav navbar-nav pull-right">
+                <li><a href="/aboutus"><span class="glyphicon glyphicon-home"></span>关于我们</a></li>
+                <li><a href="/donation"><span class="glyphicon glyphicon-heart"></span>爱心捐赠</a></li>
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+</div>
+<!-- 导航栏-end -->
+
+
+<div class="container content">
+    <h1>登录</h1>
+    <hr class="colorgraph">
+    <div th:if="${message}" class="alert alert-danger alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <strong th:text="${message}"></strong>
+    </div>
+
+    <form class="form-signin" role="form" action="/admin/adminlogin" method="post">
+        <img alt="NJU IT侠" src="/resources/images/logo.jpg" class="img-responsive center-block" />
+        <input type="text" name="account" class="form-control" placeholder="账号"  required>
+        <input type="password" name="password" class="form-control" placeholder="密码" required>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
+    </form>
+</div>
+
+<div class="container footer">
+    <hr class="colorgraph">
+    <p><small>Designed and built by <a href="/eggs" style="color:#333;cursor:default;text-decoration:none;">LC</a>. Powered by <a href="http://sae.sina.com.cn"><img src="/static/images/poweredby.gif"></a></small></p>
+</div>
+
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="/resources/base/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/resources/base/bootstrap.min.js"></script>
+</body>
+</html>

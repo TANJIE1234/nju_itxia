@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <title>南京大学-IT 侠预约系统</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="/resources/base/bootstrap.min.css">
+    <link href="/resources/style/helper/helper.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <!-- 下面的button是在页面过窄的时候将导航栏的按钮缩为一个，适合pad等小平板，手机上展示 -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span> <span
+                    class="icon-bar"></span> <span class="icon-bar"></span> <span
+                    class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">NJU-IT 侠预约系统</a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/helper/now">当前请求</a></li>
+                <li><a href="/helper/history">历史请求</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span>登出</a></li>
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+</div>
+<!-- 导航栏-end -->
+
+
+
+<div class="container" style="background-color: #fff">
+    <div>
+        <h1>请求状态</h1>
+            <hr class="colorgraph">
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+
+            <div class="panel panel-warning">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        等待处理，您将会收到站内回复
+                    </h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <p>
+                                <strong>提交时间: </strong><label th:text = "${#dates.format(order.updatedon,'yyyy-MM-dd hh:mm:ss')}"></label>
+                            </p>
+                        </div>
+                        <div class="col-sm-6">
+                            <p>
+                                <strong>手机号码: </strong><label th:text="${order.phone}"></label>
+                            </p>
+                        </div>
+                        <div class="col-sm-6">
+                            <p>
+                                <strong>邮箱: </strong><label th:text="${order.email}"></label>
+                            </p>
+                        </div>
+                        <div class="col-sm-6">
+                            <p>
+                                <strong>所在校区: </strong><label th:text="${order.location}"></label>
+                            </p>
+                        </div>
+                        <div class="col-sm-6">
+                            <p>
+                                <strong>电脑型号: </strong><label th:text="${order.model}"></label>
+                            </p>
+                        </div>
+                        <div class="col-sm-6">
+                            <p>
+                                <strong>操作系统: </strong><label th:text="${order.os}"></label>
+                            </p>
+                        </div>
+                    </div>
+                    <p>
+                        <strong>问题描述: </strong><label th:text="${order.desc}"></label>
+                    </p>
+                    <form class="fileform" role="form" method="post" style="padding-top:5px;" action="http://upload.qiniu.com" enctype="multipart/form-data">
+                        <div class="row" style="padding:5px 15px 5px 15px">
+                            <input id="uploadfile" type="file" name="file" style="float:left;display:block;">
+                            <button class="filebtn btn btn-success btn-xs" order-id="${order.id}" >点击上传</button>
+                        </div>
+                        <p class="help-block">
+                            <span class="glyphicon glyphicon-question-sign"></span>
+                            如果问题难以描述，可以上传文件来帮助我们确认问题所在
+                        </p>
+                        <input type="hidden" name="token" value="51ksljf2Ej7CoI5uL5dJWLho-yQQ_XnEptc8_wpv:NQ9fh1wYOWveyTnUFGjTBeIU0iI=:eyJzY29wZSI6Iml0a25pZ2h0IiwiZGVhZGxpbmUiOjQwMzY0ODM5MDMsInJldHVyblVybCI6Imh0dHA6Ly9uanVpdHhpYS5zaW5hYXBwLmNvbSJ9">
+                        <input type="hidden" name="key" id="formkey">
+                    </form>
+                    <div style="padding-top:7px; padding-bottom:7px;">
+                        <a href="/helper/modify" type="button" class="btn btn-warning">修改请求</a>
+                        <button type="button" class="btn btn-danger delbtn">删除请求</button>
+                        <button type="button" class="btn btn-default replybtn" th:text="展开回复信息+'('+${#lists.size(order.reply)}+')'"></button>
+                    </div>
+                    <div class="reply" style="display:none;">
+                        <div th:each="reply:${order.reply}">
+                            <div class = "row">
+                                <div th:class="${reply.replybool==0} ? 'callout callout-right':'callout callout-left'">
+                                    <h4>
+                                        <span th:text="${reply.name}" th:remove="tag"></span>
+                                        <small th:text="${reply.time}"></small>
+                                    </h4>
+                                    <p th:text="${reply.content}"></p>
+                                </div>
+                            </div>
+                            <br />
+                        </div>
+                        <form role="form" action="/helper/addreply" method="post">
+                            <textarea class="form-control content" name="content" rows="3" placeholder="点击回复..." required></textarea>
+                            <input type="text" name="order" th:value="${order.id}" style="display: none">
+                            <br />
+                            <button type="submit" class="subbtn btn btn-block btn-primary">发送信息</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+
+            <div class="panel panel-primary m-tips">
+                <div class="panel-heading">
+                    <h3 class="panel-title"> 友情提醒 </h3>
+                </div>
+                <div class="panel-body">
+                    <ul>
+                        <li>你的预约提交后， IT侠将会立刻收到邮件提醒， 如果IT侠对你的预约有疑问，他会在站内回复你； </li>
+                        <li>如果你填写了邮箱，你现在应该已经收到了一封通知邮件，请确保该邮件不被标记为垃圾邮件； IT侠后续的站内回复会通过邮件推送给你 </li>
+                        <li> <strong>如果你没有填写邮箱，请定期登录本站查看回复</strong></li>
+                        <li> 我们平均每周利用1-2个晚上集中处理预约，处理当天会有短信或电话通知； </li>
+                        <li>请尽可能详细地、清晰地描述你的问题，包括你采取过哪些措施，为什么要装系统等等； </li>
+                        <li>IT侠团队的成员有自己的工作和学习任务，因此我们很难保证所有的预约都能被解决，
+                            但我们愿意尽我们最大的努力做好这项志愿服务；</li>
+                        <li>更多信息，请关注IT侠官方微信公众号：
+                            <a rel="tooltip" data-html="true" title="<img src='/resources/images/nju-itxia.jpg' height='180px' alt='' />" target="_blank" href="/static/images/nju-itxia.jpg">
+                                nju-itxia
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!--div class="panel panel-success">
+              <div class="panel-heading">
+                <h3 class="panel-title"> IT侠的服务约定 </h3>
+              </div>
+              <div class="panel-body">
+                <ol>
+                  <li>IT侠提供纯公益性质的服务，服务过程中不收取任何费用；</li>
+                  <li>IT侠服务对象为南京大学在校师生以及为IT侠提供过捐助的爱心人士；</li>
+                  <li>IT侠视个人资料为绝密信息，保证不在服务过程泄露服务对象隐私； </li>
+                  <li>依业界惯例，IT侠不对以下情形负责：
+                    <ul>
+                      <li> 在IT侠操作没有过失前提下的数据意外丢失； </li>
+                      <li> 由于机器老化和用料低端等原因，在拆装过程中可能发生的卡扣折断、螺母碎裂等情形； </li>
+                      <li> 对处于不稳定边缘的、有潜在故障风险的机器（如显卡门机器），拆装之后发生无法开机的情形； </li>
+                      <li> 其它非IT侠操作过失造成的意外； </li>
+                    </ul>
+                  </li>
+                  <li> 对于用户没有购买的软件，IT侠顶多帮助安装试用版； </li>
+                  <li> 本服务的最终解释权归南京大学IT侠服务团队所有。</li>
+                </ol>
+              </div>
+            </div-->
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container" style="text-align: center;">
+    <hr class="colorgraph">
+    <p>
+        <small>
+            Version 2.3,
+            Powered by
+            <a href="/eggs" style="color:#333;cursor:default;text-decoration:none;">LC</a>
+            & <a href="http://blog.itxia.club/itxia-2016chun-di-yi-ci-jian-mian-hui-he-ying/" target="_blank">IT侠Web开发组</a>
+            & <a href="http://bbs.nju.edu.cn/vd15124/board?board=NoteBook" target="_blank">小百合Notebook版</a>
+        </small>
+    </p>
+    <a class="atlwdg-trigger atlwdg-RIGHT" href="http://itxia.club/donation" target="_blank" id="atlwdg-trigger">给我们捐赠</a>
+</div>
+
+<!-- Bootstrap core JavaScript -->
+<!-- ================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="/resources/base/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/resources/base/bootstrap.min.js"></script>
+
+<script src="/resources/js/helper/now.js"></script>
+
+</body>
+</html>

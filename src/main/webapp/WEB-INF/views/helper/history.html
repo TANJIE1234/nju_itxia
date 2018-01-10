@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="renderer" content="webkit">
+    <title>南京大学-IT 侠预约系统</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="/resources/base/bootstrap.min.css">
+    <link href="/resources/style/helper/helper.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+        <div class="navbar-header">
+            <!-- 下面的button是在页面过窄的时候将导航栏的按钮缩为一个，适合pad等小平板，手机上展示 -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse"
+                    data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span> <span
+                    class="icon-bar"></span> <span class="icon-bar"></span> <span
+                    class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">NJU-IT 侠预约系统</a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="/helper/now">当前请求</a></li>
+                <li class="active"><a href="/helper/history">历史请求</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span>登出</a></li>
+            </ul>
+        </div>
+        <!--/.nav-collapse -->
+    </div>
+</div>
+<!-- 导航栏-end -->
+
+
+
+
+<div class="container" style="background-color: #fff">
+    <div>
+        <h1>历史请求</h1>
+        <hr class="colorgraph">
+    </div>
+    <div th:each="order:${orderList}">
+        <div class="row">
+            <div class="col-sm-6 col-sm-offset-3">
+                <div class="panel panel-warning">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">
+                            等待处理
+                        </h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <p>
+                                    <strong>提交时间: </strong><label th:text="${#dates.format(order.updatedon,'yyyy-MM-dd hh:mm:ss')}"></label>
+                                </p>
+                            </div>
+                            <div class="col-sm-6">
+                                <p>
+                                    <strong>手机号码: </strong><label th:text="${order.phone}"></label>
+                                </p>
+                            </div>
+                            <div class="col-sm-6">
+                                <p>
+                                    <strong>百合帐号: </strong><label th:text="${order.bbsid}"></label>
+                                </p>
+                            </div>
+                            <div class="col-sm-6">
+                                <p>
+                                    <strong>所在校区: </strong><label th:text="${order.location}"></label>
+                                </p>
+                            </div>
+                            <div class="col-sm-6">
+                                <p>
+                                    <strong>电脑型号: </strong><label th:text="${order.model}"></label>
+                                </p>
+                            </div>
+                            <div class="col-sm-6">
+                                <p>
+                                    <strong>操作系统: </strong><label th:text="${order.os}"></label>
+                                </p>
+                            </div>
+                        </div>
+                        <p>
+                            <strong>问题描述: </strong><label th:text="${order.desc}"></label>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container" style="text-align: center;">
+    <hr class="colorgraph">
+    <p>
+        <small>
+            Version 2.3,
+            Powered by
+            <a href="/eggs" style="color:#333;cursor:default;text-decoration:none;">LC</a>
+            & <a href="http://blog.itxia.club/itxia-2016chun-di-yi-ci-jian-mian-hui-he-ying/" target="_blank">IT侠Web开发组</a>
+            & <a href="http://bbs.nju.edu.cn/vd15124/board?board=NoteBook" target="_blank">小百合Notebook版</a>
+        </small>
+    </p>
+    <a class="atlwdg-trigger atlwdg-RIGHT" href="http://itxia.club/donation" target="_blank" id="atlwdg-trigger">给我们捐赠</a>
+</div>
+
+
+<!-- Bootstrap core JavaScript -->
+<!-- ================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="/resources/base/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="/resources/base/bootstrap.min.js"></script>
+
+<script src="/resources/js/helper/history.js"></script>
+</body>
+</html>
