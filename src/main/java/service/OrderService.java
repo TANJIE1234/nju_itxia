@@ -18,10 +18,10 @@ public class OrderService {
     @Autowired
     private MemberService memberService;
 
-    public List<Order> getWait(){
-        List<Order> orderList = jdbcOrderRepository.getWait("鼓楼");
+    public List<Order> getWait(String location){
+        List<Order> orderList = jdbcOrderRepository.getWait(location);
         for (Order order : orderList) {
-            order.setReply(replyService.getReply(order.getId()));
+            order.setReply(replyService.getReply(order.getId(),"admin"));
         }
         return orderList;
     }
@@ -29,7 +29,7 @@ public class OrderService {
     public List<Order> getWork() {
         List<Order> orderList = jdbcOrderRepository.getWork("鼓楼");
         for (Order order : orderList) {
-            order.setReply(replyService.getReply(order.getId()));
+            order.setReply(replyService.getReply(order.getId(),"admin"));
             order.setHandlerName(memberService.getNameById(order.getHandler()));
         }
         return orderList;
@@ -38,7 +38,7 @@ public class OrderService {
     public List<Order> getFinish() {
         List<Order> orderList = jdbcOrderRepository.getFinish("鼓楼",0,10);
         for (Order order : orderList) {
-            order.setReply(replyService.getReply(order.getId()));
+            order.setReply(replyService.getReply(order.getId(),"admin"));
             order.setHandlerName(memberService.getNameById(order.getHandler()));
         }
         return orderList;
@@ -47,7 +47,7 @@ public class OrderService {
     public List<Order> getHelperOrder(String phone){
         List<Order> orderList = jdbcOrderRepository.getHelperOrder(phone);
         for (Order order : orderList) {
-            order.setReply(replyService.getReply(order.getId()));
+            order.setReply(replyService.getReply(order.getId(),"helper"));
         }
         return orderList;
     }
@@ -64,7 +64,7 @@ public class OrderService {
 
     public Order getOrder(int oid){
         Order order = jdbcOrderRepository.getOrder(oid);
-        order.setReply(replyService.getReply(oid));
+        order.setReply(replyService.getReply(oid,"helper"));
         return order;
     }
 

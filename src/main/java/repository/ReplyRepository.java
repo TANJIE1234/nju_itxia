@@ -5,7 +5,7 @@ import entity.Reply;
 import java.util.List;
 
 public interface ReplyRepository {
-    List<Reply> getReply(int orderId);
+    List<Reply> getReply(int orderId,String who);
 
     boolean addReply(Reply reply);
 

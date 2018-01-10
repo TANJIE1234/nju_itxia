@@ -32,7 +32,7 @@ public class ReplyService {
         return jdbcReplyRepository.delReply(replyId);
     }
 
-    List<Reply> getReply(int orderId) {
-        return jdbcReplyRepository.getReply(orderId);
+    List<Reply> getReply(int orderId,String who) {
+        return jdbcReplyRepository.getReply(orderId,who);
     }
 }

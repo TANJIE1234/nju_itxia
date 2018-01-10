@@ -1,5 +1,6 @@
 package repository;
 
+import entity.Order;
 import entity.Reply;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcOperations;
@@ -14,9 +15,13 @@ import java.util.List;
 @Repository
 public class JdbcReplyRepository implements ReplyRepository {
     private JdbcOperations jdbcOperations;
+    @Autowired
+    private JdbcMemberRepository jdbcMemberRepository;
+    @Autowired
+    private JdbcOrderRepository jdbcOrderRepository;
 
     private static final String SQL_GET_HELPER_REPLY = "SELECT `index`, `replybool`, `orderid`, `itxiaid`, `time`, `content` FROM `reply` WHERE `orderid`=? AND `replybool`= 0 ORDER BY `reply`.`index` ASC";
-    private static final String SQL_GET_KNIGHT_REPLY = "SELECT `index`, `replybool`, `orderid`, `itxiaid`, `time`, `content`, `account` as `name` FROM `reply` JOIN `members` WHERE `itxiaid`=`id` AND `orderid`=? AND `replybool`= 1 ORDER BY `reply`.`index` ASC";
+    private static final String SQL_GET_KNIGHT_REPLY = "SELECT `index`, `replybool`, `orderid`, `itxiaid`, `time`, `content` FROM `reply` WHERE  `orderid`=? AND `replybool`= 1 ORDER BY `reply`.`index` ASC";
     private static final String SQL_ADD_REPLY = "INSERT INTO reply (replybool,orderid,itxiaid,time,content) VALUES (?,?,?,?,?)";
     private static final String SQL_CHECK_REPLY = "SELECT `index`  FROM reply WHERE `index` = ? AND itxiaid = ?";
     private static final String SQL_DEL_REPLY = "DELETE  FROM reply WHERE `index` = ?";
@@ -25,12 +30,23 @@ public class JdbcReplyRepository implements ReplyRepository {
     public JdbcReplyRepository(JdbcOperations jdbcOperations) {
         this.jdbcOperations = jdbcOperations;
     }
-    public List<Reply> getReply(int orderId) {
+    public List<Reply> getReply(int orderId,String who) {
         List<Reply> replyList = new ArrayList<Reply>();
         List<Reply> helperReplyList = jdbcOperations.query(SQL_GET_HELPER_REPLY, new ReplyRowMapper(), orderId);
         List<Reply> knightReplyList = jdbcOperations.query(SQL_GET_KNIGHT_REPLY, new ReplyRowMapper(), orderId);
-        for (Reply reply : helperReplyList) {
-            reply.setName("我");
+        if (who == "helper") {
+            for (Reply reply : helperReplyList) {
+                reply.setName("我");
+            }
+        }
+        else {
+            for (Reply reply : helperReplyList) {
+                Order order = jdbcOrderRepository.getOrder(reply.getOrderId());
+                reply.setName(order.getName());
+            }
+        }
+        for (Reply reply : knightReplyList) {
+            reply.setName(jdbcMemberRepository.getNameById(reply.getItxiaId()));
         }
         replyList.addAll(helperReplyList);
         replyList.addAll(knightReplyList);
@@ -45,7 +61,6 @@ public class JdbcReplyRepository implements ReplyRepository {
 
     public boolean checkIndexItxia(int replyId, int itxiaId) {
         return (jdbcOperations.query(SQL_CHECK_REPLY, new ReplyRowMapper(), replyId,itxiaId).size()==1);
-
     }
 
     public boolean delReply(int replyId) {

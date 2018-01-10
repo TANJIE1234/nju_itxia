@@ -65,3 +65,10 @@
 2018-01-10 08:48:19 lab python中是动态类型，从数据库中读取order时把member.name赋值给order.handler
                                             在Java中，给Order增加一个属性handlerName？解决，在orderService中给handlerName赋值
                                              knight.js中btnreply点击后post失败，status 500
+
+2018-01-10 22:03:57 dor    解决了回复信息，reply的人名显示
+                                            knight.js
+                                            alert("callback" + data);
+                                  			$("#" + order).find(".reply").show();
+                                  			$(document).scrollTop(location);
+                                  		  最后两行没有效果。

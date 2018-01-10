@@ -29,16 +29,17 @@ $(".subbtn").click(function() {
 	var location = $(document).scrollTop();
 	// var myDate = new Date();
 	// var p = myDate.getTime();
-	$.post("/admin/addreply/", {
-			content: content,
-			order: order
+	$.post("/admin/addreply", {
+		order: order,
+		content: content
 		},
 		function(data, status) {
 			document.write(data);
 			document.close();
+            alert("callback" + data);
 			$("#" + order).find(".reply").show();
 			$(document).scrollTop(location);
-		});
+	});
 });
 
 $(".replyrow").mouseenter(function() {
