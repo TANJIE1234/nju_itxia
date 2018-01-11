@@ -37,6 +37,7 @@ $(".subbtn").click(function() {
 			document.write(data);
 			document.close();
 			$("#" + order).find(".reply").show();
+            // $(".panel-warning").find(".reply").show();
 			$(document).scrollTop(location);
 	});
 });

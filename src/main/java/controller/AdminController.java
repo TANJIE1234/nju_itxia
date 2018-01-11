@@ -35,14 +35,17 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/work", method = RequestMethod.GET)
-    public String showWork(Model model) {
+    public String showWork(@ModelAttribute("checkedMember") Member member,Model model) {
         model.addAttribute("workList", orderService.getWork());
+        model.addAttribute("number", orderService.getOrderCount(member.getLocation()));
+        model.addAttribute("member", member);
         return "/admin/work";
     }
 
     @RequestMapping(value = "/finish", method = RequestMethod.GET)
-    public String showFinish(Model model) {
+    public String showFinish(@ModelAttribute("checkedMember") Member member,Model model) {
         model.addAttribute("finishList", orderService.getFinish());
+        model.addAttribute("number", orderService.getOrderCount(member.getLocation()));
         return "/admin/finish";
     }
 
@@ -82,13 +85,16 @@ public class AdminController {
     @RequestMapping(value = "/addreply", method = RequestMethod.POST)
     public String addReply(HttpServletRequest request, @ModelAttribute("checkedMember") Member member) {
         int orderId = Integer.parseInt(request.getParameter("order"));
+        String referer = request.getHeader("referer");
         String content = request.getParameter("content");
         replyService.addAdminReply(orderId, member.getId(), content);
-        return "redirect:/admin/wait";
+        //return "redirect:/admin/wait";
+        return "redirect:"+referer;
     }
 
     @RequestMapping(value = "/delreply", method = RequestMethod.POST)
     public String deleteReply(HttpServletRequest request) {
+        System.out.println();
         int replyId = Integer.parseInt(request.getParameter("id"));
         replyService.delReply(replyId);
         return "redirect:/admin/wait";

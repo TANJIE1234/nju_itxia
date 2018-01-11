@@ -64,11 +64,11 @@
             <div class="list-group">
                 <a href="/admin/wait"
                    class="list-group-item"><span
-                        class="badge">3</span>等待处理</a> <a href="/admin/work"
+                        class="badge" th:text="${number[0]}"></span>等待处理</a> <a href="/admin/work"
                                                           class="list-group-item list-group-item-info"><span
-                    class="badge">1</span>正在处理</a> <a href="/admin/finish"
+                    class="badge" th:text="${number[1]}"></span>正在处理</a> <a href="/admin/finish"
                                                       class="list-group-item"><span
-                    class="badge">1</span>处理完成</a>
+                    class="badge" th:text="${number[2]}"></span>处理完成</a>
             </div>
         </div>
 
@@ -113,6 +113,7 @@
                                 <div class="row replyrow" replyid="${reply.id}">
                                     <div th:class="${reply.replybool==0} ? 'callout callout-left':'callout callout-right'">
                                         <h4>
+                                            <span th:if="${member.account==reply.name}" class="glyphicon glyphicon-remove" style="color:#CC0033;display:none;"></span>
                                             <span th:text="${reply.name}" th:remove="tag"></span>
                                             <small th:text="${reply.time}"></small>
                                         </h4>
@@ -121,8 +122,7 @@
                                 </div>
                             </div>
                             <br />
-                            <textarea class="form-control content" name="content" rows="3"
-                                      placeholder="点击回复..."></textarea>
+                            <textarea class="form-control content" name="content" rows="3" placeholder="点击回复..."></textarea>
                             <input type="text" class="order" name="order" th:value="${order.id}" style="display:none">
                             <br />
                             <button class="subbtn btn btn-block btn-primary">回复</button>
