@@ -11,7 +11,6 @@ import service.OrderService;
 import service.ReplyService;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Enumeration;
 import java.util.List;
 
 @Controller
@@ -31,6 +30,7 @@ public class AdminController {
     public String showWait(@ModelAttribute("checkedMember") Member member, Model model) {
         model.addAttribute("waitList", orderService.getWait(member.getLocation()));
         model.addAttribute("number", orderService.getOrderCount(member.getLocation()));
+        model.addAttribute("member", member);
         return "/admin/wait";
     }
 
@@ -83,7 +83,14 @@ public class AdminController {
     public String addReply(HttpServletRequest request, @ModelAttribute("checkedMember") Member member) {
         int orderId = Integer.parseInt(request.getParameter("order"));
         String content = request.getParameter("content");
-        replyService.addAdminReply(orderId, member.getId(),content);
+        replyService.addAdminReply(orderId, member.getId(), content);
+        return "redirect:/admin/wait";
+    }
+
+    @RequestMapping(value = "/delreply", method = RequestMethod.POST)
+    public String deleteReply(HttpServletRequest request) {
+        int replyId = Integer.parseInt(request.getParameter("id"));
+        replyService.delReply(replyId);
         return "redirect:/admin/wait";
     }
 }

@@ -105,9 +105,10 @@
                         <!--+${#lists.size(order.reply)}-->
                         <div class="reply">
                             <div th:each="reply:${order.reply}">
-                                <div class = "row replyrow">
+                                <div class = "row replyrow" th:replyid="${reply.id}">
                                     <div th:class="${reply.replybool==0} ? 'callout callout-left':'callout callout-right'">
                                         <h4>
+                                            <span th:if="${member.account==reply.name}" class="glyphicon glyphicon-remove" style="color:#CC0033;display:none;"></span>
                                             <span th:text="${reply.name}" th:remove="tag"></span>
                                             <small th:text="${reply.time}"></small>
                                         </h4>

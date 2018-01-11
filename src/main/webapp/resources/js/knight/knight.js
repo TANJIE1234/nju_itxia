@@ -36,7 +36,6 @@ $(".subbtn").click(function() {
 		function(data, status) {
 			document.write(data);
 			document.close();
-            alert("callback" + data);
 			$("#" + order).find(".reply").show();
 			$(document).scrollTop(location);
 	});
@@ -68,9 +67,9 @@ $(".glyphicon-remove").click(function() {
 		var id = $(this).parents(".replyrow").attr("replyid");
 		var order = $(this).parents(".panel").attr("id");
 		var location = $(document).scrollTop();
-		var myDate = new Date();
-		var p = myDate.getTime();
-		$.post("/knight/delreply/" + p, {
+		// var myDate = new Date();
+		// var p = myDate.getTime();
+		$.post("/admin/delreply", {
 				id: id
 			},
 			function(data, status) {

@@ -72,3 +72,5 @@
                                   			$("#" + order).find(".reply").show();
                                   			$(document).scrollTop(location);
                                   		  最后两行没有效果。
+
+2018-01-11 09:32:31 lab 按f12调试模式下上面两行就有效果了，写了wait页面的删除reply逻辑，反应比较慢，因为远程的关系？
