@@ -94,8 +94,9 @@ public class AdminController {
 
     @RequestMapping(value = "/delreply", method = RequestMethod.POST)
     public String deleteReply(HttpServletRequest request) {
-        System.out.println();
+        System.out.println("get in post");
         int replyId = Integer.parseInt(request.getParameter("id"));
+        System.out.println(replyId);
         replyService.delReply(replyId);
         return "redirect:/admin/wait";
     }
