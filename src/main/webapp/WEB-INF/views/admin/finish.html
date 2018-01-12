@@ -85,7 +85,7 @@
             </form>
             <br />
             <div th:each="order:${finishList}">
-                <div class="panel panel-success" id="${order.id}">
+                <div class="panel panel-success" th:id="${order.id}">
                 <div class="panel-heading">
                     <h3 class="panel-title">
                         <a target="_blank" th:href="@{'http://browse.renren.com/s/all?from=opensearch&q='+${order.name}+'南京大学'}" th:text="${order.name}"></a>
@@ -116,103 +116,103 @@
                         <strong>问题描述: </strong><label th:text="${order.desc}" th:remove="tag"></label>
                     </p>
 
-                    <div style="margin: 0px 0px 10px;">
-                        <strong>上传文件: </strong>
-                        <!-- Button trigger modal -->
-                        <button class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal1" style="color: #428BCA;">
-                            .JPG文件1
-                        </button>
+                    <!--<div style="margin: 0px 0px 10px;">-->
+                        <!--<strong>上传文件: </strong>-->
+                        <!--&lt;!&ndash; Button trigger modal &ndash;&gt;-->
+                        <!--<button class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal1" style="color: #428BCA;">-->
+                            <!--.JPG文件1-->
+                        <!--</button>-->
 
-                        <!-- Modal -->
-                        <div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                        <h4 class="modal-title" id="myModalLabel1">.JPG文件1</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <a target="_blank" href="http://7naqz6.com1.z0.glb.clouddn.com/4430-1460194289904.jpg" class="btn btn-default btn-sm" role="button"><img style="height: auto; width: 100%;" src="http://7naqz6.com1.z0.glb.clouddn.com/4430-1460194289904.jpg"></a>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Button trigger modal -->
-                        <button class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal2" style="color: #428BCA;">
-                            .JPG文件2
-                        </button>
+                        <!--&lt;!&ndash; Modal &ndash;&gt;-->
+                        <!--<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">-->
+                            <!--<div class="modal-dialog">-->
+                                <!--<div class="modal-content">-->
+                                    <!--<div class="modal-header">-->
+                                        <!--<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>-->
+                                        <!--<h4 class="modal-title" id="myModalLabel1">.JPG文件1</h4>-->
+                                    <!--</div>-->
+                                    <!--<div class="modal-body">-->
+                                        <!--<a target="_blank" href="http://7naqz6.com1.z0.glb.clouddn.com/4430-1460194289904.jpg" class="btn btn-default btn-sm" role="button"><img style="height: auto; width: 100%;" src="http://7naqz6.com1.z0.glb.clouddn.com/4430-1460194289904.jpg"></a>-->
+                                    <!--</div>-->
+                                    <!--<div class="modal-footer">-->
+                                        <!--<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--&lt;!&ndash; Button trigger modal &ndash;&gt;-->
+                        <!--<button class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal2" style="color: #428BCA;">-->
+                            <!--.JPG文件2-->
+                        <!--</button>-->
 
-                        <!-- Modal -->
-                        <div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                        <h4 class="modal-title" id="myModalLabel2">.JPG文件2</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <a target="_blank" href="http://7naqz6.com1.z0.glb.clouddn.com/4430-1460194318965.jpg" class="btn btn-default btn-sm" role="button"><img style="height: auto; width: 100%;" src="http://7naqz6.com1.z0.glb.clouddn.com/4430-1460194318965.jpg"></a>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Button trigger modal -->
-                        <button class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal3" style="color: #428BCA;">
-                            .JPG文件3
-                        </button>
+                        <!--&lt;!&ndash; Modal &ndash;&gt;-->
+                        <!--<div class="modal fade" id="myModal2" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">-->
+                            <!--<div class="modal-dialog">-->
+                                <!--<div class="modal-content">-->
+                                    <!--<div class="modal-header">-->
+                                        <!--<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>-->
+                                        <!--<h4 class="modal-title" id="myModalLabel2">.JPG文件2</h4>-->
+                                    <!--</div>-->
+                                    <!--<div class="modal-body">-->
+                                        <!--<a target="_blank" href="http://7naqz6.com1.z0.glb.clouddn.com/4430-1460194318965.jpg" class="btn btn-default btn-sm" role="button"><img style="height: auto; width: 100%;" src="http://7naqz6.com1.z0.glb.clouddn.com/4430-1460194318965.jpg"></a>-->
+                                    <!--</div>-->
+                                    <!--<div class="modal-footer">-->
+                                        <!--<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--&lt;!&ndash; Button trigger modal &ndash;&gt;-->
+                        <!--<button class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal3" style="color: #428BCA;">-->
+                            <!--.JPG文件3-->
+                        <!--</button>-->
 
-                        <!-- Modal -->
-                        <div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel3" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                        <h4 class="modal-title" id="myModalLabel3">.JPG文件3</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <a target="_blank" href="http://7naqz6.com1.z0.glb.clouddn.com/4430-1460194353226.jpg" class="btn btn-default btn-sm" role="button"><img style="height: auto; width: 100%;" src="http://7naqz6.com1.z0.glb.clouddn.com/4430-1460194353226.jpg"></a>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Button trigger modal -->
-                        <button class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal4" style="color: #428BCA;">
-                            .JPG文件4
-                        </button>
+                        <!--&lt;!&ndash; Modal &ndash;&gt;-->
+                        <!--<div class="modal fade" id="myModal3" tabindex="-1" role="dialog" aria-labelledby="myModalLabel3" aria-hidden="true">-->
+                            <!--<div class="modal-dialog">-->
+                                <!--<div class="modal-content">-->
+                                    <!--<div class="modal-header">-->
+                                        <!--<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>-->
+                                        <!--<h4 class="modal-title" id="myModalLabel3">.JPG文件3</h4>-->
+                                    <!--</div>-->
+                                    <!--<div class="modal-body">-->
+                                        <!--<a target="_blank" href="http://7naqz6.com1.z0.glb.clouddn.com/4430-1460194353226.jpg" class="btn btn-default btn-sm" role="button"><img style="height: auto; width: 100%;" src="http://7naqz6.com1.z0.glb.clouddn.com/4430-1460194353226.jpg"></a>-->
+                                    <!--</div>-->
+                                    <!--<div class="modal-footer">-->
+                                        <!--<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                        <!--&lt;!&ndash; Button trigger modal &ndash;&gt;-->
+                        <!--<button class="btn btn-default btn-sm" data-toggle="modal" data-target="#myModal4" style="color: #428BCA;">-->
+                            <!--.JPG文件4-->
+                        <!--</button>-->
 
-                        <!-- Modal -->
-                        <div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel4" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                                        <h4 class="modal-title" id="myModalLabel4">.JPG文件4</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <a target="_blank" href="http://7naqz6.com1.z0.glb.clouddn.com/4430-1460194401313.jpg" class="btn btn-default btn-sm" role="button"><img style="height: auto; width: 100%;" src="http://7naqz6.com1.z0.glb.clouddn.com/4430-1460194401313.jpg"></a>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                        <!--&lt;!&ndash; Modal &ndash;&gt;-->
+                        <!--<div class="modal fade" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel4" aria-hidden="true">-->
+                            <!--<div class="modal-dialog">-->
+                                <!--<div class="modal-content">-->
+                                    <!--<div class="modal-header">-->
+                                        <!--<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>-->
+                                        <!--<h4 class="modal-title" id="myModalLabel4">.JPG文件4</h4>-->
+                                    <!--</div>-->
+                                    <!--<div class="modal-body">-->
+                                        <!--<a target="_blank" href="http://7naqz6.com1.z0.glb.clouddn.com/4430-1460194401313.jpg" class="btn btn-default btn-sm" role="button"><img style="height: auto; width: 100%;" src="http://7naqz6.com1.z0.glb.clouddn.com/4430-1460194401313.jpg"></a>-->
+                                    <!--</div>-->
+                                    <!--<div class="modal-footer">-->
+                                        <!--<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>-->
+                                    <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
 
                     <button type="button" class="btn btn-default replybtn" th:text="展开回复+'('+${#lists.size(order.reply)}+')'"></button>
 
                     <div class="reply">
                         <div th:each="reply:${order.reply}">
-                            <div class="row replyrow" replyid="${reply.id}">
+                            <div class="row replyrow" th:replyid="${reply.id}">
                                 <div th:class="${reply.replybool==0} ? 'callout callout-left':'callout callout-right'">
                                     <h4>
                                         <span th:if="${member.account==reply.name}" class="glyphicon glyphicon-remove" style="color:#CC0033;display:none;"></span>
@@ -238,11 +238,11 @@
 
 <div class="container" style="text-align:center;">
     <ul class="pagination">
-        <li><a href="/knight/finish?page=0"><span class="glyphicon glyphicon-step-backward"></span></a></li>
-        <li><a href="/knight/finish?page=0"><span class="glyphicon glyphicon-backward"></span></a></li>
+        <li><a href="/admin/finish?page=0"><span class="glyphicon glyphicon-step-backward"></span></a></li>
+        <li><a href="/admin/finish?page=0"><span class="glyphicon glyphicon-backward"></span></a></li>
         <li class="active"><a href="/knight/finish?page=0">1</a></li>
-        <li><a href="/knight/finish?page=0"><span class="glyphicon glyphicon-forward"></span></a></li>
-        <li><a href="/knight/finish?page=0"><span class="glyphicon glyphicon-step-forward"></span></a></li>
+        <li><a href="/admin/finish?page=0"><span class="glyphicon glyphicon-forward"></span></a></li>
+        <li><a href="/admin/finish?page=0"><span class="glyphicon glyphicon-step-forward"></span></a></li>
     </ul>
 </div>
 
@@ -266,9 +266,9 @@
 <!-- ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="/static/base/jquery.min.js"></script>
+<script src="/resources/base/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="/static/base/bootstrap.min.js"></script>
-<script src="/static/js/knight/knight.js"></script>
+<script src="/resources/base/bootstrap.min.js"></script>
+<script src="/resources/js/knight/knight.js"></script>
 </body>
 </html>

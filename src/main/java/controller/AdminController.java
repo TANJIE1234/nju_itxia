@@ -46,6 +46,7 @@ public class AdminController {
     public String showFinish(@ModelAttribute("checkedMember") Member member,Model model) {
         model.addAttribute("finishList", orderService.getFinish());
         model.addAttribute("number", orderService.getOrderCount(member.getLocation()));
+        model.addAttribute("member", member);
         return "/admin/finish";
     }
 
@@ -94,10 +95,9 @@ public class AdminController {
 
     @RequestMapping(value = "/delreply", method = RequestMethod.POST)
     public String deleteReply(HttpServletRequest request) {
-        System.out.println("get in post");
+        String referer = request.getHeader("referer");
         int replyId = Integer.parseInt(request.getParameter("id"));
-        System.out.println(replyId);
         replyService.delReply(replyId);
-        return "redirect:/admin/wait";
+        return "redirect:"+referer;
     }
 }
