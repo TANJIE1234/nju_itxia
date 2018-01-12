@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -65,11 +65,11 @@
             <div class="list-group">
                 <a href="/admin/wait"
                    class="list-group-item"><span
-                        class="badge">3</span>等待处理</a> <a href="/admin/work"
+                        class="badge" th:text="${number[0]}">0</span>等待处理</a> <a href="/admin/work"
                                                           class="list-group-item"><span
-                    class="badge">1</span>正在处理</a> <a href="/admin/finish"
+                    class="badge" th:text="${number[1]}">0</span>正在处理</a> <a href="/admin/finish"
                                                       class="list-group-item list-group-item-success"><span
-                    class="badge">1</span>处理完成</a>
+                    class="badge" th:text="${number[2]}">0</span>处理完成</a>
             </div>
         </div>
 
@@ -83,36 +83,37 @@
             </span>
                 </div>
             </form>
-
             <br />
-
-            <div class="panel panel-success" id="4430">
+            <div th:each="order:${finishList}">
+                <div class="panel panel-success" id="${order.id}">
                 <div class="panel-heading">
                     <h3 class="panel-title">
-                        <a target="_blank" href="http://browse.renren.com/s/all?from=opensearch&q=朱蒂 南京大学">朱蒂</a>
+                        <a target="_blank" th:href="@{'http://browse.renren.com/s/all?from=opensearch&q='+${order.name}+'南京大学'}" th:text="${order.name}"></a>
                     </h3>
                 </div>
                 <div class="panel-body">
                     <p>
-                        <strong>IT侠: jujiangzhou</strong>
+                        <strong th:text="${'IT侠 '+order.handlerName}"></strong>
                     </p>
                     <p>
-                        <strong>提交时间: </strong>2016-04-08 11:27:54
+                        <strong>提交时间: </strong><label th:text="${order.updatedon}" th:remove="tag"></label>
                     </p>
                     <p>
-                        <strong>手机号码: </strong><a href="tel:13350021007">13350021007</a>
+                        <strong>手机号码: </strong><a th:href="@{tel:+${order.phone}}"  th:text="${order.phone}"></a>
                     </p>
                     <p>
-                        <strong>邮箱: </strong>
+                        <strong>邮箱: </strong><label th:text="${order.email}" th:remove="tag"></label>
                     </p>
                     <p>
-                        <strong>电脑型号: </strong><a target="_blank" href="http://www.baidu.com/s?word=华硕u303lb5200+拆机图">华硕u303lb5200</a>
+                        <strong>电脑型号: </strong>
+                        <label th:text="${order.model}" th:remove="tag"></label>
+                        <!--<a target="_blank" th:href="http://www.baidu.com/s?word=${order.model}+'拆机图'" th:text="${order.phone}"></a>-->
                     </p>
                     <p>
-                        <strong>操作系统: </strong>win-8
+                        <strong>操作系统: </strong><label th:text="${order.os}" th:remove="tag"></label>
                     </p>
                     <p>
-                        <strong>问题描述: </strong>之前是电脑几次蓝屏，然后上门显示它要提取错误信息，却一直在0%不变，我就把它强行关机了，后来打开就直接是那些设置什么的了，去找了一下修电脑的，他看了说硬盘坏了，但是问了些别的人又说那样直接看看不出来，要用软件去试。所以想让it侠帮忙看看。
+                        <strong>问题描述: </strong><label th:text="${order.desc}" th:remove="tag"></label>
                     </p>
 
                     <div style="margin: 0px 0px 10px;">
@@ -207,19 +208,30 @@
                         </div>
                     </div>
 
-                    <button type="button" class="btn btn-default replybtn">展开回复信息(0)</button>
+                    <button type="button" class="btn btn-default replybtn" th:text="展开回复+'('+${#lists.size(order.reply)}+')'"></button>
 
                     <div class="reply">
+                        <div th:each="reply:${order.reply}">
+                            <div class="row replyrow" replyid="${reply.id}">
+                                <div th:class="${reply.replybool==0} ? 'callout callout-left':'callout callout-right'">
+                                    <h4>
+                                        <span th:if="${member.account==reply.name}" class="glyphicon glyphicon-remove" style="color:#CC0033;display:none;"></span>
+                                        <span th:text="${reply.name}" th:remove="tag"></span>
+                                        <small th:text="${reply.time}"></small>
+                                    </h4>
+                                    <p th:text="${reply.content}"></p>
+                                </div>
+                            </div>
+                        </div>
                         <br />
-                        <textarea class="form-control content" name="content" rows="3"
-                                  placeholder="点击回复..."></textarea>
-                        <input type="text" class="order" name="order" value="4430" style="display: none">
+                        <textarea class="form-control content" name="content" rows="3" placeholder="点击回复..."></textarea>
+                        <input type="text" class="order" name="order" th:value="${order.id}" style="display:none">
                         <br />
                         <button class="subbtn btn btn-block btn-primary">回复</button>
                     </div>
                 </div>
             </div>
-
+            </div>
         </div>
     </div>
 </div>
