@@ -110,7 +110,7 @@
 
                         <div class="reply">
                             <div th:each="reply:${order.reply}">
-                                <div class="row replyrow" replyid="${reply.id}">
+                                <div class="row replyrow" th:replyid="${reply.id}">
                                     <div th:class="${reply.replybool==0} ? 'callout callout-left':'callout callout-right'">
                                         <h4>
                                             <span th:if="${member.account==reply.name}" class="glyphicon glyphicon-remove" style="color:#CC0033;display:none;"></span>

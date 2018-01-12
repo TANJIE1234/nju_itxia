@@ -36,8 +36,8 @@ $(".subbtn").click(function() {
 		function(data, status) {
 			document.write(data);
 			document.close();
+			$("#" + order).find(".reply").hide(0);
 			$("#" + order).find(".reply").show();
-            // $(".panel-warning").find(".reply").show();
 			$(document).scrollTop(location);
 	});
 });
@@ -76,7 +76,8 @@ $(".glyphicon-remove").click(function() {
 			function(data, status) {
 				document.write(data);
 				document.close();
-				$("#" + order).find(".reply").show();
+                $("#" + order).find(".reply").hide(0);
+                $("#" + order).find(".reply").show();
 				$(document).scrollTop(location);
 			});
 	}

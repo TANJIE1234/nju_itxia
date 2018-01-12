@@ -101,9 +101,7 @@
 
                         <button th:id="${order.id}" type="button" class="btn btn-info workbtn">我来处理</button>
                         <button type="button" class="btn btn-default replybtn" th:text="展开回复+'('+${#lists.size(order.reply)}+')'"></button>
-                        <!--<button type="button" class="btn btn-default replybtn" th:text="'('+${#lists.size(order.reply)}+')'"></button>-->
-                        <!--+${#lists.size(order.reply)}-->
-                        <div class="reply">
+                        <div class="reply" title="gdfasdsa" >
                             <div th:each="reply:${order.reply}">
                                 <div class = "row replyrow" th:replyid="${reply.id}">
                                     <div th:class="${reply.replybool==0} ? 'callout callout-left':'callout callout-right'">
