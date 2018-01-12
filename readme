@@ -78,4 +78,4 @@
 2018-01-12 09:02:15 lab window.scroll经常失灵？1.电脑型号超链接2.finish页面的翻页
 
 2018-01-12 23:22:10 dor window.scroll有用，是.show()没有执行，在show之前加上了hide(0).
-                                            明天解决finish页面的翻页
+                                            明天解决finish页面的翻页    确定处理完成的中文乱码问题
