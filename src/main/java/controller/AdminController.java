@@ -36,17 +36,28 @@ public class AdminController {
 
     @RequestMapping(value = "/work", method = RequestMethod.GET)
     public String showWork(@ModelAttribute("checkedMember") Member member,Model model) {
-        model.addAttribute("workList", orderService.getWork());
+        model.addAttribute("workList", orderService.getWork(member.getLocation()));
         model.addAttribute("number", orderService.getOrderCount(member.getLocation()));
         model.addAttribute("member", member);
         return "/admin/work";
     }
 
     @RequestMapping(value = "/finish", method = RequestMethod.GET)
-    public String showFinish(@ModelAttribute("checkedMember") Member member,Model model) {
-        model.addAttribute("finishList", orderService.getFinish());
-        model.addAttribute("number", orderService.getOrderCount(member.getLocation()));
+    public String showFinish(@RequestParam(name = "page",defaultValue = "0") String reqPage,@ModelAttribute("checkedMember") Member member,Model model) {
+        int[] number = orderService.getOrderCount(member.getLocation());
+        int finishNum = number[2];
+        int maxPage = (finishNum-1) / 1;
+        int page = Integer.parseInt(reqPage);
+        int prePage = (page==0?0:page-1);
+        int nextPage = (page==maxPage?maxPage:page+1);
+        String nowPage = page + 1 + "";
+        model.addAttribute("finishList", orderService.getFinish(member.getLocation(),page));
+        model.addAttribute("number", number);
         model.addAttribute("member", member);
+        model.addAttribute("nowPage",nowPage);
+        model.addAttribute("prePage",prePage);
+        model.addAttribute("nextPage",nextPage);
+        model.addAttribute("maxPage",maxPage);
         return "/admin/finish";
     }
 

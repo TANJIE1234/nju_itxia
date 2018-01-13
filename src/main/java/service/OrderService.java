@@ -26,8 +26,8 @@ public class OrderService {
         return orderList;
     }
 
-    public List<Order> getWork() {
-        List<Order> orderList = jdbcOrderRepository.getWork("鼓楼");
+    public List<Order> getWork(String location) {
+        List<Order> orderList = jdbcOrderRepository.getWork(location);
         for (Order order : orderList) {
             order.setReply(replyService.getReply(order.getId(),"admin"));
             order.setHandlerName(memberService.getNameById(order.getHandler()));
@@ -35,8 +35,8 @@ public class OrderService {
         return orderList;
     }
 
-    public List<Order> getFinish() {
-        List<Order> orderList = jdbcOrderRepository.getFinish("鼓楼",0,10);
+    public List<Order> getFinish(String location, int page) {
+        List<Order> orderList = jdbcOrderRepository.getFinish(location,page,1);
         for (Order order : orderList) {
             order.setReply(replyService.getReply(order.getId(),"admin"));
             order.setHandlerName(memberService.getNameById(order.getHandler()));

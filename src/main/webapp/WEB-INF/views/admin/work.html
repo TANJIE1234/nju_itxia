@@ -95,8 +95,7 @@
                         </p>
                         <p>
                             <strong>电脑型号: </strong>
-                            <label th:text="${order.model}" th:remove="tag"></label>
-                            <!--<a target="_blank" th:href="http://www.baidu.com/s?word=${order.model}+'拆机图'" th:text="${order.phone}"></a>-->
+                            <a target="_blank" th:href="@{'http://www.baidu.com/s?word='+${order.model}+'拆机图'}" th:text="${order.model}"></a>
                         </p>
                         <p>
                             <strong>操作系统: </strong><label th:text="${order.os}" th:remove="tag"></label>

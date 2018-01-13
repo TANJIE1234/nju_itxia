@@ -41,7 +41,7 @@ public class JdbcOrderRepository implements OrderRepository {
     }
 
     public List<Order> getFinish(String location, int page, int size) {
-        return jdbcOperations.query(SQL_GET_FINISH,new OrderRowMapper(),location,page,size);
+        return jdbcOperations.query(SQL_GET_FINISH,new OrderRowMapper(),location,page*size,size);
     }
 
     public List<Order> getSearch(String search, int page, int size) {
