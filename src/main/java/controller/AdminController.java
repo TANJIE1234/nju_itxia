@@ -58,6 +58,7 @@ public class AdminController {
         model.addAttribute("prePage",prePage);
         model.addAttribute("nextPage",nextPage);
         model.addAttribute("maxPage",maxPage);
+        model.addAttribute("page", page);
         return "/admin/finish";
     }
 
