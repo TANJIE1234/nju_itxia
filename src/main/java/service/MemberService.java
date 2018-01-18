@@ -19,4 +19,8 @@ public class MemberService {
     public String getNameById(int id) {
         return jdbcMemberRepository.getNameById(id);
     }
+
+    public List<Member> getAll() {
+        return jdbcMemberRepository.getAll();
+    }
 }

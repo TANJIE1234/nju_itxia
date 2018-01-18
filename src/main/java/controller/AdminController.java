@@ -35,7 +35,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/work", method = RequestMethod.GET)
-    public String showWork(@ModelAttribute("checkedMember") Member member,Model model) {
+    public String showWork(@ModelAttribute("checkedMember") Member member, Model model) {
         model.addAttribute("workList", orderService.getWork(member.getLocation()));
         model.addAttribute("number", orderService.getOrderCount(member.getLocation()));
         model.addAttribute("member", member);
@@ -43,21 +43,21 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/finish", method = RequestMethod.GET)
-    public String showFinish(@RequestParam(name = "page",defaultValue = "0") String reqPage,@ModelAttribute("checkedMember") Member member,Model model) {
+    public String showFinish(@RequestParam(name = "page", defaultValue = "0") String reqPage, @ModelAttribute("checkedMember") Member member, Model model) {
         int[] number = orderService.getOrderCount(member.getLocation());
         int finishNum = number[2];
-        int maxPage = (finishNum-1) / 1;
+        int maxPage = (finishNum - 1) / 1;
         int page = Integer.parseInt(reqPage);
-        int prePage = (page==0?0:page-1);
-        int nextPage = (page==maxPage?maxPage:page+1);
+        int prePage = (page == 0 ? 0 : page - 1);
+        int nextPage = (page == maxPage ? maxPage : page + 1);
         String nowPage = page + 1 + "";
-        model.addAttribute("finishList", orderService.getFinish(member.getLocation(),page));
+        model.addAttribute("finishList", orderService.getFinish(member.getLocation(), page));
         model.addAttribute("number", number);
         model.addAttribute("member", member);
-        model.addAttribute("nowPage",nowPage);
-        model.addAttribute("prePage",prePage);
-        model.addAttribute("nextPage",nextPage);
-        model.addAttribute("maxPage",maxPage);
+        model.addAttribute("nowPage", nowPage);
+        model.addAttribute("prePage", prePage);
+        model.addAttribute("nextPage", nextPage);
+        model.addAttribute("maxPage", maxPage);
         model.addAttribute("page", page);
         return "/admin/finish";
     }
@@ -102,7 +102,7 @@ public class AdminController {
         String content = request.getParameter("content");
         replyService.addAdminReply(orderId, member.getId(), content);
         //return "redirect:/admin/wait";
-        return "redirect:"+referer;
+        return "redirect:" + referer;
     }
 
     @RequestMapping(value = "/delreply", method = RequestMethod.POST)
@@ -110,6 +110,14 @@ public class AdminController {
         String referer = request.getHeader("referer");
         int replyId = Integer.parseInt(request.getParameter("id"));
         replyService.delReply(replyId);
-        return "redirect:"+referer;
+        return "redirect:" + referer;
+    }
+
+    @RequestMapping(value = "/setting", method = RequestMethod.GET)
+    public String getSettingPage(@ModelAttribute("checkedMember") Member member, Model model) {
+        model.addAttribute("memberList", memberService.getAll());
+        model.addAttribute("member", member);
+        System.out.println(member);
+        return "/admin/setting";
     }
 }

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,9 +10,9 @@
     <title>南京大学-IT 侠预约系统</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="/static/base/bootstrap.min.css">
+    <link rel="stylesheet" href="/resources/base/bootstrap.min.css">
 
-    <link rel="stylesheet" href="/static/style/knight/knight.css">
+    <link rel="stylesheet" href="/resources/style/knight/knight.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -37,9 +37,9 @@
         </div>
         <div class="collapse navbar-collapse" id="main-navbar">
             <ul class="nav navbar-nav">
-                <li><a href="/knight/wait"><span class="glyphicon glyphicon-list-alt"></span>处理请求</a></li>
-                <li><a href="/knight/message"><span class="glyphicon glyphicon-comment"></span>最近回复</a></li>
-                <li class="active"><a href="/knight/setting"><span class="glyphicon glyphicon-cog"></span>设置</a></li>
+                <li><a href="/admin/wait"><span class="glyphicon glyphicon-list-alt"></span>处理请求</a></li>
+                <li><a href="/admin/message"><span class="glyphicon glyphicon-comment"></span>最近回复</a></li>
+                <li th:if="${member.admin==1}" class="active"><a href="/admin/setting"><span class="glyphicon glyphicon-cog"></span>设置</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span>登出</a></li>
@@ -58,7 +58,7 @@
         <hr class="colorgraph">
     </div>
 
-    <form role="form" class="form-inline" name="input" action="/knight/setting/add" method="post">
+    <form role="form" class="form-inline" name="input" action="/admin/setting/add" method="post">
         <fieldset class="well">
             <legend>添加IT侠</legend>
             <div class="text-center">
@@ -107,41 +107,25 @@
                 <th>邮箱</th>
             </tr>
             </thead>
-            <tbody>
-            <tr >
-                <td>55</td>
-                <td>范宣德</td>
-                <td class="account">fxd12</td>
-                <td>鼓楼</td>
-                <td><button class="btn btn-success btn-xs upbtn" type="submit" value="Submit">提升为管理员</button></td>
+            <tbody th:each="member:${memberList}">
+            <tr th:class="${member.admin==1}?'success'">
+                <td th:text="${member.id}"></td>
+                <td th:text="${member.username}"></td>
+                <td class="account" th:text="${member.account}"></td>
+                <td th:text="${member.location}"></td>
+                <td th:text="${member.admin==1}?'管理员'">
+                    <button th:if="${0==0}" class="btn btn-success btn-xs upbtn" type="submit" value="Submit">提升为管理员</button></td>
                 <td></td>
             </tr>
 
-            <tr class="success">
-                <td>76</td>
-                <td>钟家鑫</td>
-                <td class="account">zhongjiaxin</td>
-                <td>鼓楼</td>
-                <td>管理员</td>
-                <td></td>
-            </tr>
-            <tr >
-                <td>86</td>
-                <td>琚江舟</td>
-                <td class="account">jujiangzhou</td>
-                <td>鼓楼</td>
-                <td><button class="btn btn-success btn-xs upbtn" type="submit" value="Submit">提升为管理员</button></td>
-                <td></td>
-            </tr>
-
-            <tr class="success">
-                <td>117</td>
-                <td>测试用管理员</td>
-                <td class="account">demo</td>
-                <td>鼓楼</td>
-                <td>管理员</td>
-                <td></td>
-            </tr>
+            <!--<tr class="success">-->
+                <!--<td>76</td>-->
+                <!--<td>钟家鑫</td>-->
+                <!--<td class="account">zhongjiaxin</td>-->
+                <!--<td>鼓楼</td>-->
+                <!--<td>管理员</td>-->
+                <!--<td></td>-->
+            <!--</tr>-->
             </tbody>
 
         </table>
