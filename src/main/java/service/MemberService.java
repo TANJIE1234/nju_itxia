@@ -23,4 +23,8 @@ public class MemberService {
     public List<Member> getAll() {
         return jdbcMemberRepository.getAll();
     }
+
+    public void insertMember(Member member) {
+        jdbcMemberRepository.insert(member);
+    }
 }

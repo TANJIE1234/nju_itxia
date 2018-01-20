@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public class JdbcMemberRepository implements MemberRepository {
     private JdbcOperations jdbcOperations;
-    private static final String SQL_INSERT_MEMBER = "insert into members (name, account, email, pw, location) values (?,?,?,?,?)";
+    private static final String SQL_INSERT_MEMBER = "insert into members (name, account, email, password, location,admin) values (?,?,?,?,?,?)";
     private static final String SQL_GET_MEMBER = "select * from members where account = ? AND password = ?";
     private static final String SQL_GET_MEMBER_BY_LOCATION = "select * from members where location = ?";
     private static final String SQL_GET_ALL_MEMBER = "select * from members";
@@ -39,7 +39,7 @@ public class JdbcMemberRepository implements MemberRepository {
     }
 
     public void insert(Member member) {
-        jdbcOperations.update(SQL_INSERT_MEMBER, member.getUsername(), member.getAccount(), member.getEmail(), member.getPassword(), member.getLocation());
+        jdbcOperations.update(SQL_INSERT_MEMBER, member.getUsername(), member.getAccount(), member.getEmail(), member.getPassword(), member.getLocation(),0);
     }
 
     public void deleteAdmin(int id) {

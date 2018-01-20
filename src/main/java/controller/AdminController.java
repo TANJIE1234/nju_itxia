@@ -120,4 +120,15 @@ public class AdminController {
         System.out.println(member);
         return "/admin/setting";
     }
+
+    @RequestMapping(value = "/setting/add", method = RequestMethod.POST)
+    public String addAdmin(Member member) {
+        memberService.insertMember(member);
+        return "redirect:/admin/setting";
+    }
+
+    @RequestMapping(value = "/setting/del", method = RequestMethod.GET)
+    public String delAdmin(@PathVariable("account") String account) {
+        return null;
+    }
 }

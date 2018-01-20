@@ -65,7 +65,7 @@
                 <div class="form-group">
                     <label class="sr-only" for="name">姓名</label>
 
-                    <input type="text" class="form-control" name="name" id="name" placeholder="姓名（实名）" required>
+                    <input type="text" class="form-control" name="username" id="name" placeholder="姓名（实名）" required>
                 </div>
                 <div class="form-group">
                     <label  class="sr-only" for="account">账号</label>
@@ -113,9 +113,11 @@
                 <td th:text="${member.username}"></td>
                 <td class="account" th:text="${member.account}"></td>
                 <td th:text="${member.location}"></td>
-                <td th:text="${member.admin==1}?'管理员'">
-                    <button th:if="${0==0}" class="btn btn-success btn-xs upbtn" type="submit" value="Submit">提升为管理员</button></td>
-                <td></td>
+                <td>
+                    <span th:if="${member.admin==1}" th:text="管理员" th:remove="tag"></span>
+                    <button th:if="${member.admin==0}" class="btn btn-success btn-xs upbtn" type="submit" value="Submit">提升为管理员</button>
+                </td>
+                <td th:text="${member.email}"></td>
             </tr>
 
             <!--<tr class="success">-->
@@ -977,10 +979,10 @@
 <!-- ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-<script src="/static/base/jquery.min.js"></script>
+<script src="/resources/base/jquery.min.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="/static/base/bootstrap.min.js"></script>
-<script src="/static/js/knight/jquery.tabledit.min.js"></script>
-<script src="/static/js/knight/setting.js"></script>
+<script src="/resources/base/bootstrap.min.js"></script>
+<script src="/resources/js/knight/jquery.tabledit.min.js"></script>
+<script src="/resources/js/knight/setting.js"></script>
 </body>
 </html>
