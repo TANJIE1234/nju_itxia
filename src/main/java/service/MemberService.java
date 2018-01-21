@@ -27,4 +27,8 @@ public class MemberService {
     public void insertMember(Member member) {
         jdbcMemberRepository.insert(member);
     }
+
+    public void changeToAdmin(int id) {
+        jdbcMemberRepository.changeToAdmin(id);
+    }
 }

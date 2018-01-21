@@ -17,5 +17,5 @@ public interface MemberRepository {
 
     void updateEmail(int id, String email);
 
-    void changeToAdmin(String account);
+    void changeToAdmin(int id);
 }

@@ -131,4 +131,10 @@ public class AdminController {
     public String delAdmin(@PathVariable("account") String account) {
         return null;
     }
+
+    @RequestMapping(value = "/setting/up/{id}", method = RequestMethod.GET)
+    public String upAdmin(@PathVariable("id") int id) {
+        memberService.changeToAdmin(id);
+        return "redirect:/admin/setting";
+    }
 }

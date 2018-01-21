@@ -8,10 +8,10 @@ $(".delbtn").click(function() {
 });
 
 $(".upbtn").click(function() {
-	account = $(this).parent().siblings(".account").text();
-	if (confirm("确定要提升'" + account + "'为管理员么?")) {
+	memberId = $(this).parent().siblings(".id").text();
+	if (confirm("确定要提升'" + memberId + "'为管理员么?")) {
 		if (confirm("真的确定么?提升后可就无法降低了")) {
-			window.location = '/knight/setting/up/' + account;
+			window.location = '/admin/setting/up/' +memberId;
 		}
 	}
 });

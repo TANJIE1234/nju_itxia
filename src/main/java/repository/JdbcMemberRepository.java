@@ -17,7 +17,7 @@ public class JdbcMemberRepository implements MemberRepository {
     private static final String SQL_GET_ALL_MEMBER = "select * from members";
     private static final String SQL_DELETE_KNIGHT = "delete from members where id = ?";
     private static final String SQL_UPDATE_EMAIL = "update members set email = ? where id = ?";
-    private static final String SQL_CHANGE_ADMIN = "update members set admin = 1 where account = ?";
+    private static final String SQL_CHANGE_ADMIN = "update members set admin = 1 where id = ?";
     private static final String SQL_GET_NAME_BY_ID= "select `name` from members where id = ?";
 
     @Autowired
@@ -50,8 +50,8 @@ public class JdbcMemberRepository implements MemberRepository {
         jdbcOperations.update(SQL_UPDATE_EMAIL, email, id);
     }
 
-    public void changeToAdmin(String account) {
-        jdbcOperations.update(SQL_CHANGE_ADMIN, account);
+    public void changeToAdmin(int id) {
+        jdbcOperations.update(SQL_CHANGE_ADMIN, id);
     }
 
     public String getNameById(int id) {
