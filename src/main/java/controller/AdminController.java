@@ -113,6 +113,11 @@ public class AdminController {
         return "redirect:" + referer;
     }
 
+    @RequestMapping(value = "/message", method = RequestMethod.GET)
+    public String getRecentMessages() {
+        return "/admin/message";
+    }
+
     @RequestMapping(value = "/setting", method = RequestMethod.GET)
     public String getSettingPage(@ModelAttribute("checkedMember") Member member, Model model) {
         model.addAttribute("memberList", memberService.getAll());
@@ -127,9 +132,17 @@ public class AdminController {
         return "redirect:/admin/setting";
     }
 
-    @RequestMapping(value = "/setting/del", method = RequestMethod.GET)
-    public String delAdmin(@PathVariable("account") String account) {
-        return null;
+    @RequestMapping(value = "/setting/update", method = RequestMethod.POST)
+    public String updateAdmin(HttpServletRequest request) {
+        String action = request.getParameter("action");
+        int id = Integer.parseInt(request.getParameter("id"));
+        if (action.equals("edit")){
+            String email = request.getParameter("email");
+            memberService.updateEmail(id,email);
+        } else if (action.equals("delete")) {
+            memberService.deleteAdmin(id);
+        }
+        return "redirect:/admin/setting";
     }
 
     @RequestMapping(value = "/setting/up/{id}", method = RequestMethod.GET)

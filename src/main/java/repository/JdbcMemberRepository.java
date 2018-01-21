@@ -55,7 +55,14 @@ public class JdbcMemberRepository implements MemberRepository {
     }
 
     public String getNameById(int id) {
-        return jdbcOperations.queryForObject(SQL_GET_NAME_BY_ID, String.class, id);
+        String name=null;
+        try {
+            name=jdbcOperations.queryForObject(SQL_GET_NAME_BY_ID, String.class, id);
+        } catch (Exception e) {
+            name=null;
+        }finally {
+            return name;
+        }
     }
 
     private static final class UserRowMapper implements org.springframework.jdbc.core.RowMapper<Member> {

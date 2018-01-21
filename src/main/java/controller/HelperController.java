@@ -41,8 +41,8 @@ public class HelperController {
     }
 
     @RequestMapping(value="/history",method = RequestMethod.GET)
-    public String history(@ModelAttribute("order") Order order,Model model){
-        model.addAttribute("orderList",orderService.getHelperOrder(order.getPhone()));
+    public String history(@ModelAttribute("phone") String phone,Model model){
+        model.addAttribute("orderList",orderService.getHelperOrder(phone));
         return "/helper/history";
     }
 

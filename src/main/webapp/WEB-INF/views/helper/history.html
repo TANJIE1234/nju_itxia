@@ -32,7 +32,7 @@
         </div>
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a href="/helper/now">当前请求</a></li>
+                <li><a th:href="@{${#lists.size(orderList)==0?'/helper/neworder':'/helper/now'}}">当前请求</a></li>
                 <li class="active"><a href="/helper/history">历史请求</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -51,6 +51,10 @@
     <div>
         <h1>历史请求</h1>
         <hr class="colorgraph">
+    </div>
+    <div th:if="${#lists.size(orderList)==0}" class="alert alert-info alert-dismissable">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true"></button>
+        <strong>暂无请求信息</strong>
     </div>
     <div th:each="order:${orderList}">
         <div class="row">

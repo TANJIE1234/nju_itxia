@@ -46,6 +46,7 @@ public class JdbcReplyRepository implements ReplyRepository {
             }
         }
         for (Reply reply : knightReplyList) {
+            System.out.println(reply.toString());
             reply.setName(jdbcMemberRepository.getNameById(reply.getItxiaId()));
         }
         replyList.addAll(helperReplyList);

@@ -31,4 +31,12 @@ public class MemberService {
     public void changeToAdmin(int id) {
         jdbcMemberRepository.changeToAdmin(id);
     }
+
+    public void updateEmail(int id, String email) {
+        jdbcMemberRepository.updateEmail(id,email);
+    }
+
+    public void deleteAdmin(int id) {
+        jdbcMemberRepository.deleteAdmin(id);
+    }
 }

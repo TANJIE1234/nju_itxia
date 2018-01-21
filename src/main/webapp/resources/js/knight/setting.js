@@ -32,7 +32,7 @@ $(".delfile").click(function() {
 });
 
 $('.m-knight-list').Tabledit({
-    url: '/knight/setting/update/',
+    url: '/admin/setting/update/',
     columns: {
         identifier: [0, 'id'],
         editable: [[5, 'email']]
