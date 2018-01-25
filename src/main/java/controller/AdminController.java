@@ -114,7 +114,9 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/message", method = RequestMethod.GET)
-    public String getRecentMessages() {
+    public String getRecentMessages(@ModelAttribute("checkedMember") Member member,Model model) {
+        model.addAttribute("newReplyList",orderService.getNewReplyOrder(member.getLocation()));
+        model.addAttribute("member", member);
         return "/admin/message";
     }
 
@@ -122,7 +124,6 @@ public class AdminController {
     public String getSettingPage(@ModelAttribute("checkedMember") Member member, Model model) {
         model.addAttribute("memberList", memberService.getAll());
         model.addAttribute("member", member);
-        System.out.println(member);
         return "/admin/setting";
     }
 

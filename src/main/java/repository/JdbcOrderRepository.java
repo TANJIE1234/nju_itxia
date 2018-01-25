@@ -24,6 +24,10 @@ public class JdbcOrderRepository implements OrderRepository {
     private static final String SQL_GET_WAIT_COUNT = "SELECT COUNT(*) FROM `order` WHERE status = 0 AND location = ?";
     private static final String SQL_GET_WORK_COUNT = "SELECT COUNT(*) FROM `order` WHERE status = 1 AND location = ?";
     private static final String SQL_GET_FINISH_COUNT = "SELECT COUNT(*) FROM `order` WHERE status = 2 AND location = ?";
+    private static final String SQL_GET_NEW_REPLY_ORDER = "SELECT * FROM " +
+            "(SELECT `orderid`,`replybool`,`time` as `replytime`  FROM " +
+            "(SELECT * FROM `reply` order by `index` desc) as b GROUP BY b.`orderid`,b.replybool,b.time  having b.`replybool`=0 ) " +
+            "as a JOIN `order` ON `order`.`id`=a.`orderid` AND `order`.`location`=? order by a.`replytime` DESC limit 0,5";
 
     @Autowired
     public JdbcOrderRepository(JdbcOperations jdbcOperations){
@@ -64,7 +68,7 @@ public class JdbcOrderRepository implements OrderRepository {
     }
 
     public List<Order> getNewReplyOrder(String location) {
-        return null;
+        return jdbcOperations.query(SQL_GET_NEW_REPLY_ORDER, new OrderRowMapper(), location);
     }
 
     public List<Order> getHelperOrder(String phone) {
