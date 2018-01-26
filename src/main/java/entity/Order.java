@@ -23,13 +23,14 @@ public class Order {
     private String desc;
     private String handlerName;
     private List<Reply> reply;
+    private Timestamp replytime;
 
-    public String getHandlerName() {
-        return handlerName;
+    public Timestamp getReplytime() {
+        return replytime;
     }
 
-    public void setHandlerName(String handlerName) {
-        this.handlerName = handlerName;
+    public void setReplytime(Timestamp replytime) {
+        this.replytime = replytime;
     }
 
     @Override
@@ -46,10 +47,35 @@ public class Order {
                 ", desc='" + desc + '\'' +
                 ", handlerName='" + handlerName + '\'' +
                 ", reply=" + reply +
+                ", replytime=" + replytime +
                 ", handler=" + handler +
                 ", name='" + name + '\'' +
                 ", status=" + status +
                 '}';
+    }
+
+    public Order(int id, Timestamp updatedon, String phone, String bbsid, String email, String location, String model, String os, String desc, int handler, String name, int status, Timestamp replytime) {
+        this.id = id;
+        this.updatedon = updatedon;
+        this.phone = phone;
+        this.bbsid = bbsid;
+        this.email = email;
+        this.location = location;
+        this.model = model;
+        this.os = os;
+        this.desc = desc;
+        this.replytime = replytime;
+        this.handler = handler;
+        this.name = name;
+        this.status = status;
+    }
+
+    public String getHandlerName() {
+        return handlerName;
+    }
+
+    public void setHandlerName(String handlerName) {
+        this.handlerName = handlerName;
     }
 
     private int handler;

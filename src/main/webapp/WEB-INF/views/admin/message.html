@@ -57,17 +57,15 @@
         <h1>最近十个有新回复的请求</h1>
         <hr class="colorgraph">
     </div>
-
     <h1 th:if="${#lists.size(newReplyList)==0}">暂无</h1>
     <div class="row">
         <div class="col-md-6 col-md-offset-3" th:each="order:${newReplyList}">
-
-            <div class="panel panel-info" id="$each.id">
+            <div class="panel panel-info" th:id="${order.id}">
             <!--<div class="panel $:color" id="$each.id">-->
                 <div class="panel-heading">
                     <h3 class="panel-title">
                         <a target="_blank" th:href="@{'http://browse.renren.com/s/all?from=opensearch&q='+${order.name}+'南京大学'}" th:text="${order.name}"></a>
-                        <small th:text="'于'+${order.name+'12:33:41'}+'回复'"></small>
+                        <small th:text="'于'+${order.replytime}+'回复'"></small>
                     </h3>
                 </div>
                 <div class="panel-body">
@@ -101,8 +99,8 @@
                     <p>
                         <strong>问题描述: </strong><label th:text="${order.desc}" th:remove="tag"></label>
                     </p>
+                    <button type="button" class="btn btn-default replybtn" th:text="'展开回复信息('+${#lists.size(order.reply)}+')'"></button>
                     <div class="reply">
-                        <strong th:text="${#lists.size(order.reply)}"></strong>
                         <div th:each="reply:${order.reply}">
                             <div class = "row replyrow" th:replyid="${reply.id}">
                                 <div th:class="${reply.replybool==0} ? 'callout callout-left':'callout callout-right'">
@@ -115,13 +113,12 @@
                                 </div>
                             </div>
                             <br />
-                            <textarea class="form-control content" name="content" rows="3" placeholder="点击回复..." required></textarea>
-                            <input type="text" class="order" name="order" th:value="${order.id}" style="display: none">
-                            <br />
-                            <button class="subbtn btn btn-block btn-primary">发送信息</button>
                         </div>
+                        <textarea class="form-control content" name="content" rows="3" placeholder="点击回复..." required></textarea>
+                        <input type="text" class="order" name="order" th:value="${order.id}" style="display: none">
+                        <br />
+                        <button class="subbtn btn btn-block btn-primary">发送信息</button>
                     </div>
-
                 </div>
             </div>
         </div>

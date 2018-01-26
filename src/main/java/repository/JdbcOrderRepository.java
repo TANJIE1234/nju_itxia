@@ -3,6 +3,7 @@ package repository;
 import entity.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcOperations;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
@@ -25,9 +26,9 @@ public class JdbcOrderRepository implements OrderRepository {
     private static final String SQL_GET_WORK_COUNT = "SELECT COUNT(*) FROM `order` WHERE status = 1 AND location = ?";
     private static final String SQL_GET_FINISH_COUNT = "SELECT COUNT(*) FROM `order` WHERE status = 2 AND location = ?";
     private static final String SQL_GET_NEW_REPLY_ORDER = "SELECT * FROM " +
-            "(SELECT `orderid`,`replybool`,`time` as `replytime`  FROM " +
+            "(SELECT `orderid`,`replybool`,`time` FROM " +
             "(SELECT * FROM `reply` order by `index` desc) as b GROUP BY b.`orderid`,b.replybool,b.time  having b.`replybool`=0 ) " +
-            "as a JOIN `order` ON `order`.`id`=a.`orderid` AND `order`.`location`=? order by a.`replytime` DESC limit 0,5";
+            "as a JOIN `order` ON `order`.`id`=a.`orderid` AND `order`.`location`=? order by a.`time` DESC limit 0,5";
 
     @Autowired
     public JdbcOrderRepository(JdbcOperations jdbcOperations){
@@ -68,7 +69,7 @@ public class JdbcOrderRepository implements OrderRepository {
     }
 
     public List<Order> getNewReplyOrder(String location) {
-        return jdbcOperations.query(SQL_GET_NEW_REPLY_ORDER, new OrderRowMapper(), location);
+        return jdbcOperations.query(SQL_GET_NEW_REPLY_ORDER, new NewReplyOrderRowMapper(), location);
     }
 
     public List<Order> getHelperOrder(String phone) {
@@ -111,6 +112,26 @@ public class JdbcOrderRepository implements OrderRepository {
                     resultSet.getInt("handler"),
                     resultSet.getString("name"),
                     resultSet.getInt("status")
+            );
+        }
+    }
+
+    private static final class NewReplyOrderRowMapper implements RowMapper<Order> {
+        public Order mapRow(ResultSet resultSet, int i) throws SQLException {
+            return new Order(
+                    resultSet.getInt("id"),
+                    resultSet.getTimestamp("updatedon"),
+                    resultSet.getString("phone"),
+                    resultSet.getString("bbsid"),
+                    resultSet.getString("email"),
+                    resultSet.getString("location"),
+                    resultSet.getString("model"),
+                    resultSet.getString("os"),
+                    resultSet.getString("desc"),
+                    resultSet.getInt("handler"),
+                    resultSet.getString("name"),
+                    resultSet.getInt("status"),
+                    resultSet.getTimestamp("time")
             );
         }
     }

@@ -1,6 +1,7 @@
 package controller;
 
 import entity.Member;
+import entity.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -117,6 +118,9 @@ public class AdminController {
     public String getRecentMessages(@ModelAttribute("checkedMember") Member member,Model model) {
         model.addAttribute("newReplyList",orderService.getNewReplyOrder(member.getLocation()));
         model.addAttribute("member", member);
+        for (Order order:orderService.getNewReplyOrder(member.getLocation())){
+            System.out.println(order.toString());
+        }
         return "/admin/message";
     }
 
