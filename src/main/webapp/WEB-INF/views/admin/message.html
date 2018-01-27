@@ -70,7 +70,7 @@
                 </div>
                 <div class="panel-body">
                     <p>
-                        <strong th:text="'当前状态:'+${order.status}"> </strong>
+                        <strong th:text="'当前状态:'+(${order.status==0}?'等待处理':(${order.status==1}?'正在处理':'处理完成'))"> </strong>
                     </p>
                     <p>
                         <strong>提交时间:</strong><label th:text="${order.updatedon}" th:remove="tag"></label>
