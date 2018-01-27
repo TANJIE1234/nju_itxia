@@ -5,11 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import service.MemberService;
 import service.OrderService;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 
@@ -46,8 +46,8 @@ public class LoginController {
     @RequestMapping(value = {"/helperlogin"}, method = RequestMethod.POST)
     public String helperLogin(String phone, RedirectAttributes model) {
         List<Order> orderList= orderService.getHelperOrder(phone);
+        model.addFlashAttribute("phone",phone);
         if (orderList.isEmpty()){
-            model.addFlashAttribute("phone",phone);
             return "redirect:/helper/neworder";
         }
         else {
@@ -57,8 +57,8 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/logout",method = RequestMethod.GET)
-    public String logout(SessionStatus status){
-        status.setComplete();
+    public String logout(HttpSession session){
+        session.invalidate();
         return "redirect:/";
     }
 }

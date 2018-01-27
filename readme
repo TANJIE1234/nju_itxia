@@ -89,3 +89,7 @@
 2018-01-21 16:20:00 dor 完成提升为管理员,删除和修改。jdbcTemplate.queryForObject()如果查询结果为空或者大于
                                             一个，会报错。在删除管理员以后，在reply中的管理员相关的回复怎么办？
                                             recentReply未完成，thymeleaf还挺强的。
+
+2018-01-27 15:01:56 lab 完成了recentReply部分，在thymeleaf中使用if?then:else结构，将else再写为if?then:else结构，
+                                            就可以实现多选一的结构了，详细参考message.html中的panel class选择。
+                                            搞一下清除session的逻辑。
