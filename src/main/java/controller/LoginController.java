@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import service.MemberService;
 import service.OrderService;
@@ -17,6 +19,7 @@ import java.util.List;
  * Created by zyzz on 11/24/17.
  */
 @Controller
+//@SessionAttributes("checkedMember")
 public class LoginController {
     @Autowired
     private MemberService memberService;
@@ -59,6 +62,7 @@ public class LoginController {
     @RequestMapping(value = "/logout",method = RequestMethod.GET)
     public String logout(HttpSession session){
         session.invalidate();
+        //session.setComplete();
         return "redirect:/";
     }
 }

@@ -92,4 +92,8 @@
 
 2018-01-27 15:01:56 lab 完成了recentReply部分，在thymeleaf中使用if?then:else结构，将else再写为if?then:else结构，
                                             就可以实现多选一的结构了，详细参考message.html中的panel class选择。
-                                            搞一下清除session的逻辑。
+                                            搞一下清除session的逻辑。有两种方式，一种是使用HttpSession.invalidate()，一种是在
+                                            controller上申明需要清除的session，再用SessionStatus.setComplete()。
+
+2018-01-28 10:44:26 dor 最基本的功能已经完成了，接下来，一个是使用Hibernate替换JdbcTemplate，还可以加上redis
+                                            等，另一个是使用springSecurity弄一下权限的事情。
